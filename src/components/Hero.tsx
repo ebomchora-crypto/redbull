@@ -5,13 +5,13 @@ import { useScrollVideo } from '../hooks/useScrollVideo'
 
 const SCROLL_LENGTH_VH = 320 // scrollable distance driving the scrub, in vh
 const FRAME_COUNT = 94
-const FRAME_W = 800
-const FRAME_H = 450
+const FRAME_W = 630
+const FRAME_H = 972
 const frameUrl = (i: number) => `/frames/f_${String(i + 1).padStart(3, '0')}.webp`
 
 // Phones: mobile browsers throttle video preload and seek unreliably, so use a canvas frame sequence.
 const useFrameMode = () =>
-  useState(() => window.matchMedia('(max-width: 767px), (pointer: coarse)').matches)[0]
+  useState(() => window.matchMedia('(max-width: 767px), (pointer: coarse) and (orientation: portrait)').matches)[0]
 
 export default function Hero() {
   const sectionRef = useRef<HTMLDivElement | null>(null)
@@ -185,13 +185,13 @@ export default function Hero() {
             ref={canvasRef}
             width={FRAME_W}
             height={FRAME_H}
-            className="h-full w-full object-contain"
+            className="h-full w-full object-cover"
             aria-hidden="true"
           />
         ) : !errored ? (
           <video
             ref={videoRef}
-            className="h-full w-full object-contain"
+            className="h-full w-full object-cover"
             muted
             playsInline
             preload="auto"
@@ -242,13 +242,13 @@ export default function Hero() {
           </p>
         </div>
 
-        <div ref={kickerRef} className="absolute left-1/2 top-[18%] -translate-x-1/2">
+        <div ref={kickerRef} className="absolute bottom-[5%] left-1/2 -translate-x-1/2 text-center sm:bottom-auto sm:top-[18%]">
           <span className="text-xs font-semibold uppercase tracking-[0.35em] text-white/70 sm:text-sm">
             Desperte a fera
           </span>
         </div>
 
-        <div ref={finalRef} className="absolute left-1/2 top-[14%] -translate-x-1/2">
+        <div ref={finalRef} className="absolute bottom-[5%] left-1/2 -translate-x-1/2 text-center sm:bottom-auto sm:top-[14%]">
           <span className="text-xs font-semibold uppercase tracking-[0.35em] text-rb-red sm:text-sm">
             A energia está servida.
           </span>
